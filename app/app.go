@@ -473,6 +473,10 @@ func (app *App) InitChainer(ctx sdk.Context, req abci.RequestInitChain) abci.Res
 	if err := tmjson.Unmarshal(req.AppStateBytes, &genesisState); err != nil {
 		panic(err)
 	}
+
+	// paramStore := app.ParamsKeeper.Subspace(baseapp.Paramspace)
+	// paramStore.Set(ctx, ParamStoreKeyfee, Fee{Fee: sdk.NewDecCoins(sdk.NewDecCoin("stake", sdk.NewInt(5)))})
+
 	return app.mm.InitGenesis(ctx, app.appCodec, genesisState)
 }
 
