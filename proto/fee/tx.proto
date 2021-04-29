@@ -1,0 +1,13 @@
+syntax = "proto3";
+package marbar3778.fee.fee;
+
+// this line is used by starport scaffolding # proto/tx/import
+
+option go_package = "github.com/marbar3778/fee/x/fee/types";
+
+// Msg defines the Msg service.
+service Msg {
+    // this line is used by starport scaffolding # proto/tx/rpc
+}
+
+// this line is used by starport scaffolding # proto/tx/message
