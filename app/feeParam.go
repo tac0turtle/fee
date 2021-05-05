@@ -11,6 +11,8 @@ import (
 
 var ParamStoreKeyfee = []byte("fee")
 
+const FeeParamspace = "fee"
+
 type Fee struct {
 	Fee sdk.DecCoins
 }
@@ -19,9 +21,13 @@ func NewFeeparam(fee sdk.DecCoins) Fee {
 	return Fee{Fee: fee}
 }
 
-var feeParamSet = types.NewParamSetPair(
-	ParamStoreKeyfee, Fee{}, ValidateFee,
-)
+func feeParamSet() types.KeyTable {
+	return types.NewKeyTable(
+		types.NewParamSetPair(
+			ParamStoreKeyfee, Fee{}, ValidateFee,
+		),
+	)
+}
 
 func ValidateFee(i interface{}) error {
 	v, ok := i.(Fee)

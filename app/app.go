@@ -247,12 +247,13 @@ func New(
 
 	app.ParamsKeeper = initParamsKeeper(appCodec, cdc, keys[paramstypes.StoreKey], tkeys[paramstypes.TStoreKey])
 
-	pkt := paramskeeper.ConsensusParamsKeyTable()
-	pkt.RegisterType(feeParamSet)
+	paramStore := app.ParamsKeeper.Subspace(baseapp.Paramspace).WithKeyTable(paramskeeper.ConsensusParamsKeyTable())
+	feeParamStore := app.ParamsKeeper.Subspace(FeeParamspace).WithKeyTable(feeParamSet())
 
-	paramStore := app.ParamsKeeper.Subspace(baseapp.Paramspace).WithKeyTable(pkt)
 	// set the BaseApp's parameter store
 	bApp.SetParamStore(paramStore)
+	// set the fee parameter store
+	bApp.SetParamStore(feeParamStore)
 
 	// add capability keeper and ScopeToModule for ibc module
 	app.CapabilityKeeper = capabilitykeeper.NewKeeper(appCodec, keys[capabilitytypes.StoreKey], memKeys[capabilitytypes.MemStoreKey])
