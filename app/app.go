@@ -476,7 +476,7 @@ func (app *App) InitChainer(ctx sdk.Context, req abci.RequestInitChain) abci.Res
 	}
 
 	paramStore := app.ParamsKeeper.Subspace(baseapp.Paramspace)
-	paramStore.Set(ctx, ParamStoreKeyfee, Fee{Fee: sdk.NewDecCoins(sdk.NewDecCoin("stake", sdk.NewInt(5)))})
+	paramStore.Set(ctx, ParamStoreKeyfee, FeeParams{Fee: sdk.NewDecCoins(sdk.NewDecCoin("stake", sdk.NewInt(5)))})
 
 	return app.mm.InitGenesis(ctx, app.appCodec, genesisState)
 }
